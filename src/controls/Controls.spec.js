@@ -3,7 +3,6 @@ import React from "react"
 import { render } from "@testing-library/react"
 
 import Controls from "./Controls"
-import { truncate } from "fs";
 
  test('Controls renders to the screen', () => {
      render(<Controls />);
@@ -27,4 +26,14 @@ test('If closed state is false, expect close/open button to say Close Gate', () 
 test('If closed state is true, expect close/open button to say Open Gate', () => {
     const { getByText } = render(<Controls closed={true} />)
     expect(getByText(/Open Gate/i))
+})
+
+test('Closed toggle button is disabled if gate is locked', () => {
+    const { getByText } = render(<Controls locked={true} closed={true} />)
+    expect(getByText(/Open Gate/i).disabled).toBe(true)
+})
+
+test('Locked toggle button is disabled if the gate is open', () => {
+    const { getByText } = render(<Controls locked={false} closed={false} />)
+    expect(getByText(/Lock Gate/i).disabled).toBe(true)
 })
