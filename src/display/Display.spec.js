@@ -22,7 +22,6 @@ test(`Display 'Closed' if the closed prop is true, and 'Open' if false`, () => {
     const { getByText, queryByText } = render(<Display closed={true} />);
     expect(getByText(/Closed/i));
     expect(queryByText(/Open/i)).toBeFalsy();
-    expect(getByText(/Closed/i).classList.contains('red-led')).toBe(true);
 })
 
 test(`Class should be 'red-led' if 'Locked' or 'Closed'`, () => {
